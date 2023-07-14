@@ -1,7 +1,7 @@
-import React from 'react';
-import useRecipesStore from "../../../store/store.js";
+import useRecipesStore from "../../store/store.js";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+
 const RecipePage = () => {
    const { id } = useParams();
    const recipes = useRecipesStore((state) => state.recipes);

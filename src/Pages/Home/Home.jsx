@@ -1,4 +1,4 @@
-import RecipesList from "../../RecipesList/RecipesList"
+import RecipesList from "../../components/RecipesList/RecipesList";
 
 const Home = () => {
    return (
