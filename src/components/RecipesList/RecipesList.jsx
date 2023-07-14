@@ -8,15 +8,13 @@ const RecipesList = () => {
    const fetchRecipes = useRecipesStore((state) => state.fetchRecipes);
    const selectedRecipes = useRecipesStore((state) => state.selectedRecipes);
    const removeSelectedRecipes = useRecipesStore((state) => state.removeSelectedRecipes);
-   useEffect(() => {
-      fetchRecipes(1);
-   }, []);
 
    useEffect(() => {
       if (recipes.length === 0) {
-         fetchRecipes(2);
+         fetchRecipes();
       }
    }, [recipes.length, fetchRecipes]);
+
    const handleDelete = () => {
       removeSelectedRecipes()
    }

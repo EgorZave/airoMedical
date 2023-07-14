@@ -3,6 +3,7 @@ import { create } from "zustand";
 const useRecipesStore = create((set) => ({
    recipes: [],
    selectedRecipes: [],
+   currentPage: 1,
    selectRecipe: (id) => set((state) => {
       const selectedRecipe = state.recipes.find((item) => item.id === id);
       if (selectedRecipe) {
@@ -20,10 +21,14 @@ const useRecipesStore = create((set) => ({
       recipes: state.recipes.filter((item) => !state.selectedRecipes.includes(item)),
       selectedRecipes: []
    })),
-   fetchRecipes: async (page) => {
-      const response = await fetch(`https://api.punkapi.com/v2/beers?page=${page}`);
+   fetchRecipes: async () => {
+      const { currentPage } = useRecipesStore.getState();
+      const response = await fetch(`https://api.punkapi.com/v2/beers?page=${currentPage}`);
       const result = await response.json();
-      set({ recipes: result })
+      set((state) => ({
+         recipes: result,
+         currentPage: state.currentPage + 1
+      }));
    }
 }));
 
